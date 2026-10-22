@@ -4,11 +4,14 @@
 
 
 .custom-btn {
-    width: 130px;
+    min-width: 130px;          /* was: width (fixed) -> ab text ke hisaab se barh sakta hai */
     height: 40px;
+    padding: 0 20px;           /* chhoti screen par text border se na chipke */
+    white-space: nowrap;       /* text 2 lines mein nahi tootega */
+    font-size: 16px;
     background-color: white;
     border-radius: 30px;
-    color: black; 
+    color: black;
     position: relative;
     transition: color 0.4s ease;
     display: flex;
@@ -27,10 +30,9 @@
     left: 0;
     bottom: 0;
     transition: height 0.4s ease;
-    background-color: orange; 
+    background-color: orange;
     z-index: -1;
 }
-
 
 .custom-btn:hover::before {
     height: 100%;
@@ -40,26 +42,31 @@
     color: white;
 }
 
+/* Tablet */
+@media (max-width: 768px) {
+    .custom-btn {
+        min-width: 100px;
+        height: 36px;
+        padding: 0 14px;
+        font-size: 14px;
+    }
+}
 
-.wrong-input{
+/* Mobile */
+@media (max-width: 480px) {
+    .custom-btn {
+        min-width: auto;       /* sirf text jitni width */
+        height: 32px;
+        padding: 0 10px;
+        font-size: 12px;
+    }
+}
+
+.wrong-input {
     animation-name: wrong;
     animation-direction: alternate;
     animation-duration: 1s;
     animation-timing-function: ease-in-out;
     border: 1px solid red;
     color: red;
-}
-
-@keyframes wrong {
-     0%{
-        transform: translateX(0);
-     } 25%{
-        transform: translateX(10px);
-     } 50%{
-        transform: translateX(-10px);
-     } 75%{
-        transform: translateX(10px);
-     } 100%{
-        transform: translateX(0);
-     } 
 }
