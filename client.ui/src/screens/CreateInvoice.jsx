@@ -129,26 +129,35 @@ const CreateInvoice = () => {
     setTimeout(() => {
       const element = invoiceRef.current;
       const opt = {
-        margin: 0.2,
+        margin: [0.3, 0.3, 0.3, 0.3],
         filename: `Invoice_${Date.now()}.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
       };
 
       html2pdf().set(opt).from(element).save().then(() => {
         setIsPrinting(false);
       });
-    }, 300);
+    }, 400);
   };
 
   return (
-    <div className='min-h-screen bg-slate-100 py-10'>
-      <div className='flex justify-center py-16'>
-        <div ref={invoiceRef} className='bg-white rounded-xl w-[95%] lg:w-[90%] p-8 shadow-xl relative'>
+    <div className='min-h-screen bg-slate-100 py-10 flex flex-col items-center justify-center'>
+      
+      {/* Container Wrapper */}
+      <div className='w-full max-w-4xl px-4 flex flex-col items-center'>
+        
+        {/* Printable Card Area */}
+        <div 
+          ref={invoiceRef} 
+          className={`bg-white rounded-xl w-full p-8 shadow-xl relative transition-all ${
+            isPrinting ? 'max-w-[780px] mx-auto border border-gray-200' : ''
+          }`}
+        >
           
           {/* Header */}
-          <div className='flex justify-between items-center border-b py-'>
+          <div className='flex justify-between items-center border-b pb-4'>
             <div className='flex items-center gap-3'>
               <img src="/images/logo.png" alt="Logo" className='w-[45px] h-[45px] object-contain' />
               <h1 className='text-3xl font-bold text-stone-700'>InvoiceX</h1>
@@ -225,7 +234,7 @@ const CreateInvoice = () => {
           </div>
 
           {/* Table Body Rows */}
-          <div className='flex flex-col gap-2 pt-2'>
+          <div className='flex flex-col gap-2 pt-2 min-h-[120px]'>
             {rows.map((row, index) => {
               const filteredProducts = allProducts.filter((p) => {
                 const prodName = p.title || p.name || '';
@@ -235,13 +244,13 @@ const CreateInvoice = () => {
               return (
                 <div 
                   key={index} 
-                  className={`grid ${isPrinting ? 'grid-cols-11' : 'grid-cols-12'} gap-2 items-center bg-slate-50 p-2 rounded-lg border border-stone-200 text-center text-xs relative`}
+                  className={`grid ${isPrinting ? 'grid-cols-11' : 'grid-cols-12'} gap-2 items-center bg-slate-50 p-2.5 rounded-lg border border-stone-200 text-center text-xs relative`}
                 >
                   
                   {/* Name Input */}
                   <div className='col-span-3 relative text-left pl-1'>
                     {isPrinting ? (
-                      <span className='font-semibold text-stone-800'>{row.name}</span>
+                      <span className='font-semibold text-stone-800 break-words'>{row.name}</span>
                     ) : (
                       <input 
                         type="text" 
@@ -372,9 +381,9 @@ const CreateInvoice = () => {
             })}
           </div>
 
-          {/* Grand Total */}
-          <div className='flex justify-end pt-6 pr-2'>
-            <div className='flex gap-4 items-center bg-blue-50 p-3.5 rounded-xl border border-blue-200'>
+          {/* Grand Total - Clean Bottom Placement */}
+          <div className='flex justify-end pt-10 pb-4 pr-2 mt-auto'>
+            <div className='flex gap-4 items-center bg-blue-50 p-4 rounded-xl border border-blue-200 shadow-sm'>
               <span className='text-lg font-bold text-stone-700'>Grand Total:</span>
               <span className='text-2xl font-bold text-blue-600'>
                 PKR {grandTotal.toFixed(0)}
