@@ -2,7 +2,7 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Navbar from './Navbar'
 
-const Layout = () => {
+const layout = () => {
   return (
       <div className='min-h-screen relative '>
         <Navbar />
@@ -14,4 +14,4 @@ const Layout = () => {
   )
 }
 
-export default Layout
+export default layout

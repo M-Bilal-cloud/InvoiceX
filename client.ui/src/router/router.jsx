@@ -4,7 +4,7 @@ import Products from "../screens/Products";
 import UpdateProduct from "../screens/UpdateProduct";
 import Invoice from "../screens/Invoice";
 import CreateInvoice from "../screens/CreateInvoice";
-import Layout from "../components/Layout";
+import Layout from "../components/Layout.jsx";
 import AddProduct from "../screens/AddProduct";
 
 
