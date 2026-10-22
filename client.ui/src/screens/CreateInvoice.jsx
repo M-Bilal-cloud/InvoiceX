@@ -161,14 +161,14 @@ const CreateInvoice = () => {
   const gridCols = isPrinting ? 'grid-cols-11' : 'grid-cols-12';
 
   return (
-    <div className="min-h-screen bg-slate-100 py-6 sm:py-10 flex flex-col items-center">
+    <div className="min-h-screen bg-slate-100 pt-32 pb-10 flex flex-col items-center">
       <div className="w-full max-w-4xl px-3 sm:px-4 flex flex-col items-center">
         {/* Printable Card */}
         <div
           ref={invoiceRef}
-          style={isPrinting ? { width: '780px' } : undefined}
-          className={`bg-white rounded-xl w-full p-4 sm:p-8 relative ${
-            isPrinting ? 'border border-gray-200' : 'shadow-xl'
+          style={isPrinting ? { width: '720px' } : undefined}
+          className={`bg-white w-full p-4 sm:p-8 relative ${
+            isPrinting ? '' : 'rounded-xl shadow-xl'
           }`}
         >
           {/* Header */}
@@ -239,8 +239,8 @@ const CreateInvoice = () => {
           )}
 
           {/* Table: scrolls sideways on small screens instead of squashing */}
-          <div className={isPrinting ? '' : 'overflow-x-auto pb-2'}>
-            <div className={isPrinting ? '' : 'min-w-[820px]'}>
+          <div className={isPrinting ? '' : 'overflow-x-auto lg:overflow-visible pb-2'}>
+            <div className={isPrinting ? '' : 'min-w-[820px] lg:min-w-0'}>
               {/* Table Header */}
               <div
                 className={`grid ${gridCols} gap-2 bg-blue-600 min-h-[44px] rounded-lg items-center text-white font-bold px-3 text-center text-xs shadow-md mt-4`}
@@ -257,7 +257,7 @@ const CreateInvoice = () => {
               </div>
 
               {/* Rows */}
-              <div className="flex flex-col gap-2 pt-2 min-h-[120px]">
+              <div className={`flex flex-col gap-2 pt-2 ${isPrinting ? '' : 'min-h-[120px]'}`}>
                 {rows.map((row, index) => {
                   const filteredProducts = allProducts.filter((p) => {
                     const prodName = p.title || p.name || '';
