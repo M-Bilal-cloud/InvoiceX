@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-const API_URL = `http://localhost:7000/api/v1/products`;
-
+const API_URL = `https://invoicex-6nda.onrender.com/api/v1/products`;
 export const fetchProduct = async () => {
     const res = await axios.get(API_URL);
     return res.data;
