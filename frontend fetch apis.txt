@@ -1,0 +1,27 @@
+import axios from 'axios';
+
+const API_URL = 'http://localhost:7000/api/v1/products';
+
+// 1. Fetch All Products
+export const fetchProducts = async () => {
+    const res = await axios.get(API_URL);
+    return res.data;
+};
+
+// 2. Add New Product
+export const createProduct = async (productData) => {
+    const res = await axios.post(API_URL, productData);
+    return res.data;
+};
+
+// 3. Update Product
+export const updateProduct = async (id, productData) => {
+    const res = await axios.patch(`${API_URL}/${id}`, productData);
+    return res.data;
+};
+
+// 4. Delete Product
+export const deleteProduct = async (id) => {
+    const res = await axios.delete(`${API_URL}/${id}`);
+    return res.data;
+};
